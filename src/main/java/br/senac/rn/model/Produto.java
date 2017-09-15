@@ -1,34 +1,42 @@
+
 package br.senac.rn.model;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-@Entity
-public class Categoria {
+@Entity(name = "tb_produtos")
+public class Produto {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
     private int id;
     private String nome;
     private String descricao;
+    private float preco;
+    @ManyToOne
+    private Categoria categoria;
+    
 
-    public Categoria() {
+    public Produto() {
     }
 
-    public Categoria(int id, String nome, String descricao) {
+    public Produto(int id, String nome, String descricao, float preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
+        this.preco = preco;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public float getPreco() {
+        return preco;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setPreco(float preco) {
+        this.preco = preco;
     }
 
     public int getId() {
@@ -47,10 +55,18 @@ public class Categoria {
         this.nome = nome;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.id;
+        hash = 67 * hash + this.id;
         return hash;
     }
 
@@ -65,7 +81,7 @@ public class Categoria {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
+        final Produto other = (Produto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -74,9 +90,8 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + '}';
+        return "Produto{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco + '}';
     }
-
     
     
 }

@@ -1,48 +1,46 @@
 package br.senac.rn.dao;
 
-import br.senac.rn.model.Sexo;
+import br.senac.rn.model.Categoria;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 
-public class SexoDAO {
-    
+public class CategoriaDAO {
     private EntityManager manager;
     private EntityManagerFactory factory;
 
-    public SexoDAO() {
+    public CategoriaDAO() {
         factory = Persistence.createEntityManagerFactory("ConexaoDB");
         manager = factory.createEntityManager();
     } 
    
-    public void inserir(Sexo sexo){
+    public void inserir(Categoria categoria){
         manager.getTransaction().begin();
-        manager.persist(sexo);
+        manager.persist(categoria);
         manager.getTransaction().commit();
     }  
-    public void excluir(Sexo sexo)    {
+    public void excluir(Categoria categoria)    {
         manager.getTransaction().begin();
-        manager.remove(sexo);
+        manager.remove(categoria);
         manager.getTransaction().commit();
 }
     
-    public void atualizar(Sexo sexo) {
+    public void atualizar(Categoria categoria) {
         manager.getTransaction().begin();
-        manager.merge(sexo); //ATUALIZAR
+        manager.merge(categoria);
         manager.getTransaction().commit();
     }
     
-    public List<Sexo> buscarTodos() {
-        TypedQuery<Sexo> consulta = manager.createQuery("SELECT s FROM Sexo s", Sexo.class);
+    public List<Categoria> buscarTodos() {
+        TypedQuery<Categoria> consulta = manager.createQuery("SELECT s FROM Sexo s", Categoria.class);
         return consulta.getResultList();
     }
-        public Sexo buscaPorId(int id) {
-            return manager.find(Sexo.class, id);
+        public Categoria buscaPorId(int id) {
+            return manager.find(Categoria.class, id);
               
         } 
-       
+ 
 }
